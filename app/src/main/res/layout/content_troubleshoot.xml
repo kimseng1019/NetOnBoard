@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.netonboard.netonboardv2.TroubleshootActivity"
+    tools:showIn="@layout/activity_troubleshoot"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/troubleshoot_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTroubleshootHeaderBG"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="7dp"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/troubleshoot_server_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:maxLines="1"
+                android:text="SADAS"
+                android:textColor="@color/colorTroubleshootHeading"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/troubleshoot_server_image_light"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:backgroundTint="@color/colorRed"
+                android:src="@drawable/ic_cloud_queue_black_24dp" />
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/troubleshoot_server_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:text="Server_type"
+            android:textColor="@color/colorTroubleshootHeading"
+            android:textSize="18sp" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <GridLayout
+            android:id="@+id/troubleshoot_body"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginBottom="5dp"
+                android:layout_row="0"
+                android:text="Description: "
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/troubleshoot_server_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_row="0"
+                android:text="descriptionData" />
+
+            <TextView
+                android:id="@+id/troubleshoot_server_dt_create"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginBottom="5dp"
+                android:layout_row="1"
+                android:text="Down Since: "
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/troubleshoot_server_dt_create_v"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_row="1"
+                android:text="serverDownSinceData" />
+
+            <TextView
+                android:id="@+id/troubleshoot_user_handle_name"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginBottom="5dp"
+                android:layout_row="2"
+                android:text="User Handling: "
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/troubleshoot_user_handle_name_v"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_row="2"
+                android:text="userHandlingData" />
+
+            <TextView
+                android:id="@+id/troubleshoot_server_dt_start"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginBottom="5dp"
+                android:layout_row="3"
+                android:text="Task taken since: "
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/troubleshoot_server_dt_start_v"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_row="3"
+                android:text="serverDowntimeStart" />
+
+            <TextView
+                android:id="@+id/troubleshoot_server_dt_estimate"
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_column="0"
+                android:layout_marginBottom="5dp"
+                android:layout_row="4"
+                android:text="Estimation completion: "
+                android:textAlignment="textEnd" />
+
+            <TextView
+                android:id="@+id/troubleshoot_server_dt_estimate_v"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_column="1"
+                android:layout_row="4"
+                android:text="serverDowntimeComplete" />
+
+        </GridLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:id="@+id/spacer_remark"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_below="@id/troubleshoot_body" />
+
+    <TextView
+        android:id="@+id/troubleshoot_remark_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spacer_remark"
+        android:text="Remark: "
+        android:textColor="@color/colorAccent" />
+
+    <RelativeLayout
+        android:id="@+id/troubleshoot_remark_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/troubleshoot_remark_desc"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:descendantFocusability="beforeDescendants"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:id="@+id/troubleshoot_remark"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border"
+            android:gravity="top"
+            android:inputType="textMultiLine"
+            android:lines="8"
+            android:overScrollMode="always"
+            android:paddingLeft="8dp"
+            android:scrollHorizontally="false"
+            android:scrollbarStyle="insideInset"
+            android:scrollbars="vertical" />
+    </RelativeLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/troubleshoot_remark_layout"
+        android:layout_marginRight="7dp"
+        android:layout_marginTop="8dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:padding="4dp">
+
+        <Button
+            android:id="@+id/btn_troubleshoot_update"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/btn_troubleshoot_take"
+            android:layout_toStartOf="@+id/btn_troubleshoot_take"
+            android:background="@color/colorTroubleshootHeaderBG"
+            android:elevation="4dp"
+            android:text="Next"
+            android:textColor="@color/colorTroubleshootHeading" />
+
+        <Button
+            android:id="@+id/btn_troubleshoot_take"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@color/colorTroubleshootHeaderBG"
+            android:elevation="4dp"
+            android:padding="5dp"
+            android:text="Troubleshoot"
+            android:textColor="@color/colorTroubleshootHeading" />
+
+    </LinearLayout>
+</LinearLayout>

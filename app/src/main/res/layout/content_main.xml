@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="com.example.netonboard.netonboardv2.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <!--1st section start, support standby-->
+    <TextView
+        android:id="@+id/standby_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@color/colorMainSectionTitle"
+        android:elevation="3pt"
+        android:text="Standby Support"
+        android:textAlignment="center"
+        android:textColor="@color/colorMainPageHeading"
+        android:textSize="24sp" />
+
+
+    <LinearLayout
+        android:id="@+id/standby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/standby_header"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_standby_support"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="Standby:" />
+        <TextView
+            android:id="@+id/tv_standby"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Standby User" />
+
+
+    </LinearLayout>
+    <!--1st section end-->
+
+    <!--2nd section begin, server down-->
+    <TextView
+        android:id="@+id/server_down_heading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/standby"
+        android:background="@color/colorMainSectionTitle"
+        android:elevation="3pt"
+        android:text="Server Down"
+        android:textAlignment="center"
+        android:textColor="@color/colorMainPageHeading"
+        android:textSize="24sp"
+        />
+
+    <RelativeLayout
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/server_down_heading"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_alignParentTop="true">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_server_down"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+    </RelativeLayout>
+    <!--2nd section end-->
+
+    <!--3rd section begin, server down history-->
+    <TextView
+        android:id="@+id/tv_error_history_header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/error"
+        android:background="@color/colorMainSectionTitle"
+        android:elevation="3pt"
+        android:text="Server Down History"
+        android:textAlignment="center"
+        android:textColor="@color/colorMainPageHeading"
+        android:textSize="24sp"
+        />
+
+    <TextView
+        android:id="@+id/tv_error_history_no_server_down"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_error_history_header"
+        android:layout_marginTop="8dp"
+        android:text="No Server down in the last 7 days"
+        android:textAlignment="center" />
+
+
+    <!--<android.support.v7.widget.RecyclerView-->
+    <!--android:id="@+id/rv_server_down_history"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_below="@+id/tv_error_history_header">-->
+
+    <!--</android.support.v7.widget.RecyclerView>-->
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_error_history_header">
+
+        <TableLayout
+            android:id="@+id/table_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_error_history_header"
+            android:layout_centerHorizontal="true"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="2pt">
+
+
+        </TableLayout>
+    </ScrollView>
+    <!--3rd section end-->
+
+</RelativeLayout>
