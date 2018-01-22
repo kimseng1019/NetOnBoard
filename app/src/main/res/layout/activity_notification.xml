@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.netonboard.netonboardv2.NotificationActivity"
+    android:background="@drawable/notification_background">
+
+    <TextView
+        android:id="@+id/txt_notify"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Server Down"
+        android:textSize="50dp"
+        android:textColor="@color/colorWhite"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="100dip"
+
+        />
+
+    <Button
+        android:id="@+id/btn_handle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="50dip"
+        android:layout_marginTop="400dip"
+        android:background="@drawable/custom_button"
+        android:onClick="onHandle"
+        android:text="Handle"
+        android:textColor="@color/colorWhite" />
+
+    <Button
+        android:id="@+id/btn_snooze"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="50dip"
+        android:layout_marginTop="400dip"
+        android:background="@drawable/custom_button"
+        android:onClick="onSnooze"
+        android:text="Snooze"
+        android:textColor="@color/colorWhite" />
+</RelativeLayout>
