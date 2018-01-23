@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -24,6 +25,12 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -33,6 +40,8 @@ import cz.msebera.android.httpclient.Header;
 
 public class TroubleshootActivity extends AppCompatActivity {
 
+    final static String TAG = "TroubleshootActivity";
+    static final String FILENAMEREMARK = "remark";
     Button btn_take, btn_update;
     String sos_id, userID;
     SharedPreferences sp_pref;
@@ -291,25 +300,41 @@ public class TroubleshootActivity extends AppCompatActivity {
     }
 
     public void updatePostData() {
-        url = "http://cloudsub04.trio-mobile.com/curl/mobile/sos/update_progress_sos.php?id=" + sos_id + "&uid=" + userID;
-        RequestParams params = new RequestParams();
-        params.put("s_type", taskStatus);
-        params.put("s_remark", tf_remark.getText().toString());
-        if (taskStatus.equals("snooze"))
-            params.put("i_snooze", timeToComplete);
-
-        AsyncHttpClient client = new AsyncHttpClient();
-        client.post(url, params, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                Toast.makeText(getApplicationContext(), "Job Updated", Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(getApplicationContext(), "Failed to update", Toast.LENGTH_SHORT).show();
-            }
-        });
+        //TODO DECIDE IF NEED IMMEDIATE POST DATA OR NOT
+//        url = "http://cloudsub04.trio-mobile.com/curl/mobile/sos/update_progress_sos.php?id=" + sos_id + "&uid=" + userID;
+//        RequestParams params = new RequestParams();
+//        params.put("s_type", taskStatus);
+//        params.put("s_remark", tf_remark.getText().toString());
+//        if (taskStatus.equals("snooze"))
+//            params.put("i_snooze", timeToComplete);
+//
+//        AsyncHttpClient client = new AsyncHttpClient();
+//        client.post(url, params, new AsyncHttpResponseHandler() {
+//            @Override
+//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
+//                Toast.makeText(getApplicationContext(), "Job Updated", Toast.LENGTH_SHORT).show();
+//            }
+//
+//            @Override
+//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
+//                Toast.makeText(getApplicationContext(), "Failed to update", Toast.LENGTH_SHORT).show();
+//
+//            }
+//        });
+        try{
+            FileOutputStream output = openFileOutput(FILENAMEREMARK, Context.MODE_PRIVATE);
+            BufferedWriter bufferedWriter = new BufferedWriter(new PrintWriter(output));
+            bufferedWriter.write(sos_id);
+            bufferedWriter.write(";" + taskStatus);
+            if(taskStatus.equals("snooze"))
+                bufferedWriter.write(";"+timeToComplete);
+            bufferedWriter.write(";" + tf_remark.getText().toString());
+            bufferedWriter.flush();
+            output.close();
+            Log.i(TAG, "Written to file");
+        }catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

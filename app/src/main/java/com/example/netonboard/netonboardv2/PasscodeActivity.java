@@ -108,6 +108,7 @@ public class PasscodeActivity extends AppCompatActivity {
         } else {
             tv_passcodeAttempt.setText("Invalid Credential");
             tv_passcodeAttempt.setTextColor(Color.RED);
+            tf_passcode.setText("");
         }
 
     }
