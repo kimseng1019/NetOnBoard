@@ -23,12 +23,12 @@
         android:id="@+id/btn_handle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="50dip"
-        android:layout_marginTop="400dip"
+        android:layout_below="@+id/btn_snooze"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
         android:background="@drawable/custom_button"
         android:onClick="onHandle"
-        android:text="Handle"
+        android:text="Open App"
         android:textColor="@color/colorWhite" />
 
     <Button
@@ -42,4 +42,16 @@
         android:onClick="onSnooze"
         android:text="Snooze"
         android:textColor="@color/colorWhite" />
+
+    <Button
+        android:id="@+id/btn_mute"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/btn_snooze"
+        android:background="@drawable/custom_button"
+        android:layout_alignBottom="@+id/btn_snooze"
+        android:textColor="@color/colorWhite"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="39dp"
+        android:text="Mute" />
 </RelativeLayout>

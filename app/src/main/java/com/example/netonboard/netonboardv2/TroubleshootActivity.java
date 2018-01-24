@@ -300,7 +300,7 @@ public class TroubleshootActivity extends AppCompatActivity {
     }
 
     public void updatePostData() {
-        //TODO DECIDE IF NEED IMMEDIATE POST DATA OR NOT
+        //TODO DECIDE IF NEED IMMEDIATE POST DATA OR NOT, also how to give feedback to user on data sucessfully send
 //        url = "http://cloudsub04.trio-mobile.com/curl/mobile/sos/update_progress_sos.php?id=" + sos_id + "&uid=" + userID;
 //        RequestParams params = new RequestParams();
 //        params.put("s_type", taskStatus);

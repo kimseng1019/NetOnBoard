@@ -65,8 +65,8 @@ public class BackgroundService extends Service {
     public static final String FILENAMEREMARK = "remark";
     static final int REFRESHSUPPORT = 1000 * 60 * 30;
     static final int REFRESHSERVER = 1000;
-    static final int REFRESHNOTIFICATION = 1000*60*5;
-    static final int NOTIFICATIONDELAYTIME = 1000*60/2;
+    static final int REFRESHNOTIFICATION = 1000;
+    static final int NOTIFICATIONDELAYTIME = 1000*60*5;
     final static String TAG = "BackgroundService";
 
     final static int fiveMinuteMillis = 1000 * 60 * 5;
@@ -86,6 +86,7 @@ public class BackgroundService extends Service {
 
     public static Timestamp lastPromptTime;
     int curServerDown = 0;
+    int lastServerDown = 0;
 
     public BackgroundService() {
     }
@@ -180,7 +181,7 @@ public class BackgroundService extends Service {
             writeToFile(FILENAMEDOWN, body);
             try {
                 JSONArray jArray = new JSONArray(body);
-                if (jArray.length() > curServerDown) //if newComing serverDown is more than curServerDown
+                if (jArray.length() > curServerDown && isAppIsInBackground(getApplicationContext())) //if newComing serverDown is more than curServerDown
                     notificationBuilder(jArray.length());
 
                 curServerDown = jArray.length();
@@ -294,7 +295,7 @@ public class BackgroundService extends Service {
         long curTimeLong = System.currentTimeMillis();
         long timeDiff = (curTimeLong - lastPromptLong)/1000;
         Log.i(TAG, timeDiff + "s");
-        if (curServerDown > 0 && curTimeLong > lastPromptLong + NOTIFICATIONDELAYTIME && isAppIsInBackground(getApplicationContext())) {
+        if ((curServerDown > 0 && curTimeLong > lastPromptLong + NOTIFICATIONDELAYTIME) && isAppIsInBackground(getApplicationContext())) {
             notificationBuilder(curServerDown);
             Log.i(TAG, "Prompt notificationBuilder");
         }
@@ -384,9 +385,5 @@ public class BackgroundService extends Service {
             }
         }
         return isInBackground;
-    }
-
-    public void setLastPromptTime(Timestamp lastPromptTime) {
-        this.lastPromptTime = lastPromptTime;
     }
 }
