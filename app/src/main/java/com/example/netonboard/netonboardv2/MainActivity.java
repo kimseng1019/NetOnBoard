@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
                 Log.i(TAG, "Support update");
-                handlerSupport.postDelayed(this, 1000);
+                handlerSupport.postDelayed(this, 30000);
             }
         };
 

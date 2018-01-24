@@ -13,4 +13,5 @@
     <color name="colorMainPageHeading">#FFFFFF</color>
     <color name="colorRed">#FF0000</color>
     <color name="colorRightArrow">#808080</color>
+    <color name="colorWhite">#FFFFFF</color>
 </resources>
