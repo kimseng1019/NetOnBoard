@@ -224,15 +224,14 @@ public class SettingsActivity extends AppCompatPreferenceActivity {
             // to their values. When their values change, their summaries are
             // updated to reflect the new value, per the Android Design
             // guidelines.
-//            bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
+            bindPreferenceSummaryToValue(findPreference("notifications_new_message_ringtone"));
         }
 
         @Override
         public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), SettingsActivity.class));
-                return true;
+            switch (item.getItemId()){
+                case android.R.id.home:
+                    return true;
             }
             return super.onOptionsItemSelected(item);
         }

@@ -65,7 +65,8 @@ public class BackgroundService extends Service {
     public static final String FILENAMEREMARK = "remark";
     static final int REFRESHSUPPORT = 1000 * 60 * 30;
     static final int REFRESHSERVER = 1000;
-    static final int REFRESHNOTIFICATION = 1000 * 60;
+    static final int REFRESHNOTIFICATION = 1000*60*5;
+    static final int NOTIFICATIONDELAYTIME = 1000*60/2;
     final static String TAG = "BackgroundService";
 
     final static int fiveMinuteMillis = 1000 * 60 * 5;
@@ -83,7 +84,7 @@ public class BackgroundService extends Service {
     private ConnectivityManager connectivityManager;
     public static NotificationManager notificationManager;
 
-    Timestamp lastPromptTime;
+    public static Timestamp lastPromptTime;
     int curServerDown = 0;
 
     public BackgroundService() {
@@ -124,9 +125,11 @@ public class BackgroundService extends Service {
                     loadServerDownList();
                     LoadErrorHistory();
                     postRemark();
+                    Log.i(TAG, "DATA Updated");
                 } else {
                     Log.e(TAG, "Network is not available");
                 }
+                notificationPrompt();
             }
         };
         tm_network = new Timer();
@@ -145,14 +148,14 @@ public class BackgroundService extends Service {
         tm_standbySupport = new Timer();
         tm_standbySupport.schedule(timerTaskSupport, 0, REFRESHSUPPORT);
 
-        TimerTask timerTaskNotification = new TimerTask() {
-            @Override
-            public void run() {
-                notificationPrompt();
-            }
-        };
-        tm_notification = new Timer();
-        tm_notification.schedule(timerTaskNotification, 5000, REFRESHNOTIFICATION);
+//        TimerTask timerTaskNotification = new TimerTask() {
+//            @Override
+//            public void run() {
+//                notificationPrompt();
+//            }
+//        };
+//        tm_notification = new Timer();
+//        tm_notification.schedule(timerTaskNotification, 5000, REFRESHNOTIFICATION);
 
     }
 
@@ -184,7 +187,7 @@ public class BackgroundService extends Service {
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.i(TAG, "Written sDown");
+//            Log.i(TAG, "Written sDown");
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG, "IOException at loadServerDownList");
@@ -198,7 +201,7 @@ public class BackgroundService extends Service {
         try {
             String body = client.newCall(request).execute().body().string();
             writeToFile(FILENAMEHISTORY, body);
-            Log.i(TAG, "Written sH");
+//            Log.i(TAG, "Written sH");
         } catch (IOException e) {
             e.printStackTrace();
             Log.e(TAG, "IOException at LoadErrorHistory");
@@ -285,12 +288,16 @@ public class BackgroundService extends Service {
         }
         return null;
     }
-    //TODO MOVE NOTIFICATIONPROMPT TO THE SERVERUPDATE TIMER AND DELETE THE NOTIFICATION TIMER
+
     public void notificationPrompt() {
         long lastPromptLong = lastPromptTime.getTime();
         long curTimeLong = System.currentTimeMillis();
-        if (curServerDown > 0 && curTimeLong > lastPromptLong + 1000*60);
+        long timeDiff = (curTimeLong - lastPromptLong)/1000;
+        Log.i(TAG, timeDiff + "s");
+        if (curServerDown > 0 && curTimeLong > lastPromptLong + NOTIFICATIONDELAYTIME && isAppIsInBackground(getApplicationContext())) {
             notificationBuilder(curServerDown);
+            Log.i(TAG, "Prompt notificationBuilder");
+        }
     }
 
     public void notificationBuilder(int numServerDown) {
@@ -326,13 +333,11 @@ public class BackgroundService extends Service {
 //        notificationBuilder.setContentIntent(pendingIntent);
 //        notificationManager.notify(mID, notificationBuilder.build());
 //        Log.v("VALUE NOTIFICATION: ", String.valueOf(mID));
-        if (isAppIsInBackground(getApplicationContext())) {
-            Intent alert = new Intent(this, NotificationActivity.class);
-            alert.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            alert.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            lastPromptTime.setTime(System.currentTimeMillis());
-            startActivity(alert);
-        }
+        Intent alert = new Intent(this, NotificationActivity.class);
+        alert.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        alert.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        lastPromptTime.setTime(System.currentTimeMillis());
+        startActivity(alert);
     }
 
     private boolean isNetworkAvailable() {
@@ -381,4 +386,7 @@ public class BackgroundService extends Service {
         return isInBackground;
     }
 
+    public void setLastPromptTime(Timestamp lastPromptTime) {
+        this.lastPromptTime = lastPromptTime;
+    }
 }

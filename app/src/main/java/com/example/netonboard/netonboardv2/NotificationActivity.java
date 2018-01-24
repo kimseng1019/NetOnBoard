@@ -29,6 +29,7 @@ public class NotificationActivity extends AppCompatActivity {
     Timer tm_sound;
     TimerTask tt_sound;
     final static String TAG = "NotificationActivity";
+    final static long PROMPTDELAY = 1000*60/2;//Set the delay to next prompt when snooze is pressed, set based on
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,6 +79,7 @@ public class NotificationActivity extends AppCompatActivity {
 
     public void onSnooze(View view) {
         tm_sound.cancel();
+        BackgroundService.lastPromptTime.setTime(System.currentTimeMillis()); //Delay the timeToPrompt next notification by PROMPTDELAY
         moveTaskToBack(true);
         finish();
     }
