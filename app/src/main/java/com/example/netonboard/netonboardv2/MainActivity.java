@@ -7,12 +7,9 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -59,8 +56,6 @@ public class MainActivity extends AppCompatActivity {
     //Server Down History section
     ArrayList<ServerDownHistory> al_serverDownHistory;
     TextView tv_no_server_down_history;
-    RecyclerView rv_server_down_history;
-    GridLayoutManager layout_manager_history;
     TableLayout tableLayout;
 
     Handler handlerSupport, handlerServerDown, handlerServerHistory;
@@ -75,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
 
         //Initialization
         //1st section, standby support
-        tv_standby = (TextView) findViewById(R.id.tv_standby);
-        tv_standby_support = (TextView) findViewById(R.id.tv_standby_support);
+        tv_standby = (TextView) findViewById(R.id.tv_standby_data);
+        tv_standby_support = (TextView) findViewById(R.id.tv_standby_descrip);
 
         //2nd section, server down
         al_serverDown = new ArrayList<>();
@@ -95,11 +90,6 @@ public class MainActivity extends AppCompatActivity {
         //3rd section, server down history
         al_serverDownHistory = new ArrayList<>();
         tv_no_server_down_history = (TextView) findViewById(R.id.tv_error_history_no_server_down);
-//        rv_server_down_history = (RecyclerView) findViewById(R.id.rv_server_down_history);
-//        server_down_history_adapter = new ServerDownHistoryAdapter(al_serverDownHistory);
-//        rv_server_down_history.setAdapter(server_down_history_adapter);
-//        layout_manager_history = new GridLayoutManager(this, 1);
-//        rv_server_down_history.setLayoutManager(layout_manager_history);
         tableLayout = (TableLayout) findViewById(R.id.table_layout);
 
         loadStandBy();
@@ -109,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
+//        getMenuInflater().inflate(R.menu.toolbar_menu, menu);
         return true;
     }
 

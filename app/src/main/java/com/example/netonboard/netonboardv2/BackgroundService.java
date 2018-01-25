@@ -264,6 +264,7 @@ public class BackgroundService extends Service {
             bufferedWriter.write(msg);
             bufferedWriter.flush();
             output.close();
+//            Log.i(TAG, msg);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {

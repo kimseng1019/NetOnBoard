@@ -51,6 +51,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.example.netonboard.netonboardv2.MainActivity" />
         </activity>
+        <activity
+            android:name=".NavActivity"
+            android:label="@string/title_activity_nav"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

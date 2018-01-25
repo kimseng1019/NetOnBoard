@@ -101,7 +101,7 @@ public class PasscodeActivity extends AppCompatActivity {
 
         if (passcode == storedPasscode) {
             Toast.makeText(getApplicationContext(), "Login Successful", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(this, MainActivity.class);
+            Intent intent = new Intent(this, NavActivity.class);
             finish();
             startActivity(intent);
         } else if (passcode == -1) {
