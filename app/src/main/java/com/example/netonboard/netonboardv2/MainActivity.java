@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     //Server Down History section
-    ArrayList<ServerDownHistory> al_serverDownHistory;
+    ArrayList<ServerHistory> al_serverHistory;
     TextView tv_no_server_down_history;
     TableLayout tableLayout;
 
@@ -88,9 +88,8 @@ public class MainActivity extends AppCompatActivity {
         rv_server_down.setAdapter(server_down_adapter);
 
         //3rd section, server down history
-        al_serverDownHistory = new ArrayList<>();
+        al_serverHistory = new ArrayList<>();
         tv_no_server_down_history = (TextView) findViewById(R.id.tv_error_history_no_server_down);
-        tableLayout = (TableLayout) findViewById(R.id.table_layout);
 
         loadStandBy();
         loadServerDown();
@@ -240,7 +239,7 @@ public class MainActivity extends AppCompatActivity {
                         jArray = jObj.getJSONArray("server_list");
                         for (int i = 0; i < jArray.length(); i++) {
                             JSONObject jServerListObj = jArray.getJSONObject(i);
-                            ServerDownHistory serverObj = new ServerDownHistory(jServerListObj.getInt("sos_alert_id"), jServerListObj.getString("s_server_name"), jServerListObj.getInt("user_id_handle"),
+                            ServerHistory serverObj = new ServerHistory(jServerListObj.getInt("sos_alert_id"), jServerListObj.getString("s_server_name"), jServerListObj.getInt("user_id_handle"),
                                     jServerListObj.getString("s_user_handle_name"), jServerListObj.getString("dt_create"), jServerListObj.getString("dt_start"), jServerListObj.getString("dt_complete"));
 
                             addRecordToTable(tr_content, i, serverObj.getServer_name(), serverObj.getUser_handle_name(), serverObj.getDt_complete());

@@ -130,24 +130,12 @@
     <!--android:layout_below="@+id/tv_error_history_header">-->
 
     <!--</android.support.v7.widget.RecyclerView>-->
-
-    <ScrollView
+    <de.codecrafters.tableview.SortableTableView
+        android:id="@+id/table_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_error_history_header">
+        android:layout_below="@+id/tv_error_history_header" />
 
-        <TableLayout
-            android:id="@+id/table_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_error_history_header"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="2pt">
-
-
-        </TableLayout>
-    </ScrollView>
     <!--3rd section end-->
 
 </RelativeLayout>

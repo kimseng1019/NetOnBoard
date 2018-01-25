@@ -4,7 +4,7 @@ package com.example.netonboard.netonboardv2;
  * Created by Netonboard on 9/1/2018.
  */
 
-public class ServerDownHistory {
+public class ServerHistory {
     private int sos_alert_id;
     private String server_name;
     private int user_id_handle;
@@ -13,10 +13,10 @@ public class ServerDownHistory {
     private String dt_start;
     private String dt_complete;
 
-    public ServerDownHistory() {
+    public ServerHistory() {
     }
 
-    public ServerDownHistory(int sos_alert_id, String server_name, int user_id_handle, String user_handle_name, String dt_created, String dt_start, String dt_complete) {
+    public ServerHistory(int sos_alert_id, String server_name, int user_id_handle, String user_handle_name, String dt_created, String dt_start, String dt_complete) {
         this.sos_alert_id = sos_alert_id;
         this.server_name = server_name;
         this.user_id_handle = user_id_handle;
@@ -84,7 +84,7 @@ public class ServerDownHistory {
 
     @Override
     public String toString() {
-        return "ServerDownHistory{" +
+        return "ServerHistory{" +
                 "sos_alert_id=" + sos_alert_id +
                 ", server_name='" + server_name + '\'' +
                 ", user_id_handle=" + user_id_handle +
