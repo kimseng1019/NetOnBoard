@@ -134,7 +134,8 @@
         android:id="@+id/table_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_error_history_header" />
+        android:layout_below="@+id/tv_error_history_header"
+        app:tableView_headerColor="@color/colorPrimary"/>
 
     <!--3rd section end-->
 
