@@ -149,11 +149,13 @@ public class BackgroundService extends Service {
             String body = client.newCall(request).execute().body().string();
             fileIO.writeToFile(fileIO.FILENAMEDOWN, body);
             try {
-                JSONArray jArray = new JSONArray(body);
-                if (jArray.length() > curServerDown && isAppIsInBackground(getApplicationContext())) //if newComing serverDown is more than curServerDown
-                    notificationBuilder(jArray.length());
+                if(!body.equals("")) {
+                    JSONArray jArray = new JSONArray(body);
+                    if (jArray.length() > curServerDown && isAppIsInBackground(getApplicationContext())) //if newComing serverDown is more than curServerDown
+                        notificationBuilder(jArray.length());
 
-                curServerDown = jArray.length();
+                    curServerDown = jArray.length();
+                }
             } catch (JSONException e) {
                 e.printStackTrace();
             }
