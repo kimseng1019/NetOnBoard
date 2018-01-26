@@ -7,8 +7,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -25,9 +23,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
-import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -212,7 +208,7 @@ public class TroubleshootActivity extends AppCompatActivity {
                     updatePostData();
 
                 finish();
-                Intent intent = new Intent(TroubleshootActivity.this, MainActivity.class);
+                Intent intent = new Intent(TroubleshootActivity.this, NavActivity.class);
                 startActivity(intent);
 
             }
@@ -258,7 +254,7 @@ public class TroubleshootActivity extends AppCompatActivity {
                     updatePostData();
                     finish();
                     Toast.makeText(getApplicationContext(), "Job Completed", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(TroubleshootActivity.this, MainActivity.class);
+                    Intent intent = new Intent(TroubleshootActivity.this, NavActivity.class);
                     startActivity(intent);
                 }
 

@@ -35,19 +35,20 @@
         android:weightSum="2">
 
         <TextView
-            android:id="@+id/tv_standby_support"
+            android:id="@+id/tv_standby_descrip"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="right"
             android:text="Standby:" />
+
         <TextView
-            android:id="@+id/tv_standby"
+            android:id="@+id/tv_standby_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
-            android:text="Standby User" />
+            android:text="Standby Support Data" />
 
 
     </LinearLayout>
@@ -64,8 +65,7 @@
         android:text="Server Down"
         android:textAlignment="center"
         android:textColor="@color/colorMainPageHeading"
-        android:textSize="24sp"
-        />
+        android:textSize="24sp" />
 
     <RelativeLayout
         android:id="@+id/error"
@@ -86,6 +86,17 @@
                 android:layout_height="wrap_content" />
         </ScrollView>
 
+        <TextView
+            android:id="@+id/tv_server_down_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="No server is down right now"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="center"/>
     </RelativeLayout>
     <!--2nd section end-->
 
@@ -100,8 +111,7 @@
         android:text="Server Down History"
         android:textAlignment="center"
         android:textColor="@color/colorMainPageHeading"
-        android:textSize="24sp"
-        />
+        android:textSize="24sp" />
 
     <TextView
         android:id="@+id/tv_error_history_no_server_down"
@@ -120,24 +130,13 @@
     <!--android:layout_below="@+id/tv_error_history_header">-->
 
     <!--</android.support.v7.widget.RecyclerView>-->
-
-    <ScrollView
+    <de.codecrafters.tableview.SortableTableView
+        android:id="@+id/table_history"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/tv_error_history_header">
+        android:layout_below="@+id/tv_error_history_header"
+        app:tableView_headerColor="@color/colorPrimary"/>
 
-        <TableLayout
-            android:id="@+id/table_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/tv_error_history_header"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
-            android:layout_marginTop="2pt">
-
-
-        </TableLayout>
-    </ScrollView>
     <!--3rd section end-->
 
 </RelativeLayout>
