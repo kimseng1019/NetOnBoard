@@ -1,0 +1,26 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.netonboard.netonboardv2.SupportServerHistory">
+
+    <!--3rd section begin, server down history-->
+    <TextView
+        android:id="@+id/tv_error_history_no_server_down"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_error_history_header"
+        android:layout_marginTop="8dp"
+        android:text="No Server down in the last 7 days"
+        android:textAlignment="center" />
+    <de.codecrafters.tableview.SortableTableView
+        android:id="@+id/table_history"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/tv_error_history_header"
+        />
+
+    <!--3rd section end-->
+
+</FrameLayout>

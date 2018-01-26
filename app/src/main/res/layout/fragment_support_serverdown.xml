@@ -1,0 +1,44 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="com.example.netonboard.netonboardv2.SupportServerDown">
+
+    <!--2nd section begin, server down-->
+
+    <RelativeLayout
+        android:id="@+id/error"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/server_down_heading"
+        android:background="#FFFFFF"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_server_down"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/tv_server_down_empty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:text="No server is down right now"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:textAlignment="center"/>
+    </RelativeLayout>
+    <!--2nd section end-->
+
+
+</FrameLayout>
