@@ -44,11 +44,11 @@ public class SupportServerHistory extends Fragment {
         if (table_history != null) {
             table_history.setColumnCount(3);
             TableColumnWeightModel weightModel = new TableColumnWeightModel(3);
-            weightModel.setColumnWeight(0, 1);
-            weightModel.setColumnWeight(1, 2);
-            weightModel.setColumnWeight(2, 2);
+            weightModel.setColumnWeight(0, 2);
+            weightModel.setColumnWeight(1, 3);
+            weightModel.setColumnWeight(2, 3);
             table_history.setColumnModel(weightModel);
-            String[] table_header = {"Server", "User Handle", "Completed"};
+            String[] table_header = {"Server", "User", "Completed"};
             table_history.setHeaderAdapter(new SimpleTableHeaderAdapter(view.getContext(), table_header));
             serverHistoryAdapter = new ServerHistoryAdapter(view.getContext(), al_serverHistory);
             table_history.setDataAdapter(serverHistoryAdapter);

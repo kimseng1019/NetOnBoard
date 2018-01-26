@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="com.example.netonboard.netonboardv2.SupportServerHistory">
 
-    <!--3rd section begin, server down history-->
     <TextView
         android:id="@+id/tv_error_history_no_server_down"
         android:layout_width="match_parent"
@@ -21,6 +20,5 @@
         android:layout_below="@+id/tv_error_history_header"
         />
 
-    <!--3rd section end-->
 
 </FrameLayout>
