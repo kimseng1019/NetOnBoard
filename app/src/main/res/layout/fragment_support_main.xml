@@ -1,0 +1,40 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.netonboard.netonboardv2.SupportMain">
+
+    <!--1st section start, support standby-->
+    <LinearLayout
+        android:id="@+id/standby"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/standby_header"
+        android:background="#FFFFFF"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="10dip"
+        android:paddingTop="10dip"
+        android:weightSum="2">
+
+        <TextView
+            android:id="@+id/tv_standby_descrip"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="Standby:" />
+
+        <TextView
+            android:id="@+id/tv_standby_data"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="left"
+            android:text="Standby Support Data" />
+
+
+    </LinearLayout>
+    <!--1st section end-->
+
+</FrameLayout>
