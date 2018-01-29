@@ -296,27 +296,6 @@ public class TroubleshootActivity extends AppCompatActivity {
     }
 
     public void updatePostData() {
-        //TODO DECIDE IF NEED IMMEDIATE POST DATA OR NOT, also how to give feedback to user on data sucessfully send
-//        url = "http://cloudsub04.trio-mobile.com/curl/mobile/sos/update_progress_sos.php?id=" + sos_id + "&uid=" + userID;
-//        RequestParams params = new RequestParams();
-//        params.put("s_type", taskStatus);
-//        params.put("s_remark", tf_remark.getText().toString());
-//        if (taskStatus.equals("snooze"))
-//            params.put("i_snooze", timeToComplete);
-//
-//        AsyncHttpClient client = new AsyncHttpClient();
-//        client.post(url, params, new AsyncHttpResponseHandler() {
-//            @Override
-//            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-//                Toast.makeText(getApplicationContext(), "Job Updated", Toast.LENGTH_SHORT).show();
-//            }
-//
-//            @Override
-//            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-//                Toast.makeText(getApplicationContext(), "Failed to update", Toast.LENGTH_SHORT).show();
-//
-//            }
-//        });
         try{
             FileOutputStream output = openFileOutput(FILENAMEREMARK, Context.MODE_PRIVATE);
             BufferedWriter bufferedWriter = new BufferedWriter(new PrintWriter(output));

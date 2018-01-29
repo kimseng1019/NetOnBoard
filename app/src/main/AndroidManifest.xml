@@ -26,10 +26,6 @@
         <activity
             android:name=".PasscodeActivity"
             android:theme="@style/NoActionBarTheme" />
-        <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <service
             android:name=".BackgroundService"
@@ -46,10 +42,10 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".NavActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.netonboard.netonboardv2.MainActivity" />
+                android:value="com.example.netonboard.netonboardv2.NavActivity" />
         </activity>
         <activity
             android:name=".NavActivity"
@@ -58,8 +54,9 @@
         <activity
             android:name=".CalendarActivity"
             android:label="@string/title_activity_calendar"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".NavActivity"></activity>
+            android:parentActivityName=".NavActivity"
+            android:theme="@style/AppTheme.NoActionBar" />
+
     </application>
 
 </manifest>
