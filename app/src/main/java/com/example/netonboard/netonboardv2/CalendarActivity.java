@@ -1,10 +1,12 @@
 package com.example.netonboard.netonboardv2;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.widget.Toast;
@@ -12,7 +14,11 @@ import android.widget.Toast;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.prolificinteractive.materialcalendarview.DayViewDecorator;
+import com.prolificinteractive.materialcalendarview.DayViewFacade;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
+import com.prolificinteractive.materialcalendarview.spans.DotSpan;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +30,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -36,17 +43,12 @@ import okhttp3.Request;
 public class CalendarActivity extends AppCompatActivity {
     private static final String TAG = "CalendarActivity";
 
-    //    GridView grid_calendar;
-//    ImageView left_imageButton, right_imageButton;
-//    TextView tv_month;
     Calendar currentDate;
 
     MaterialCalendarView calendarView;
     GlobalFileIO fileIO;
 
-    ArrayList<HolidayObject> al_holiday;
-    HashSet<CalendarDay> hs_calenderDate;
-    HashSet<CalendarDay> al_calendarDay;
+    HashMap<CalendarDay, String> hm_calendarDate;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,8 +61,7 @@ public class CalendarActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         fileIO = new GlobalFileIO(getBaseContext());
-        al_holiday = new ArrayList<>();
-        hs_calenderDate = new HashSet<>();
+        hm_calendarDate = new HashMap<>();
 
         currentDate = Calendar.getInstance();
         calendarView = (MaterialCalendarView) findViewById(R.id.calendar_view);
@@ -70,13 +71,26 @@ public class CalendarActivity extends AppCompatActivity {
                 .commit();
 
 
-        if (isOnline(getBaseContext())){
+        if (isOnline(getBaseContext())) {
             loadCalendar(currentDate.get(Calendar.YEAR));
-        }else{
+        } else {
             Toast.makeText(getApplicationContext(), "No connection, loading previous data", Toast.LENGTH_SHORT);
             //TODO LOAD PREVIOUS DATA
             updateCalendar();
         }
+
+        calendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                CalendarDay selectedDate = calendarView.getSelectedDate();
+                for (CalendarDay obj :
+                        hm_calendarDate.keySet()) {
+                    if (selectedDate.equals(obj)) {
+                        Toast.makeText(getBaseContext(), hm_calendarDate.get(obj), Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        });
 
     }
 
@@ -93,38 +107,34 @@ public class CalendarActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Toast.makeText(getApplicationContext(), "Failed to connect", Toast.LENGTH_SHORT);
+                Toast.makeText(getBaseContext(), "Failed to connect", Toast.LENGTH_SHORT).show();
             }
         });
 
     }
 
-    public void updateCalendar(){
+    public void updateCalendar() {
         File file = new File(getBaseContext().getFilesDir(), fileIO.FILENAMECALENDAR);
-        if(file.exists()){
+        if (file.exists()) {
             try {
                 String body = fileIO.readFile(fileIO.FILENAMECALENDAR);
                 JSONObject jsonBody = new JSONObject(body);
                 JSONArray response = new JSONArray(jsonBody.getString("response"));
-                al_holiday.clear();
-                hs_calenderDate.clear();
+                hm_calendarDate.clear();
                 SimpleDateFormat serverDateFormat = new SimpleDateFormat("yyyy-MM-dd");
                 for (int i = 0; i < response.length(); i++) {
                     JSONObject jsonObject = response.getJSONObject(i);
-                    System.out.println(serverDateFormat.parse(jsonObject.getString("d_holiday")));
                     Date date = serverDateFormat.parse(jsonObject.getString("d_holiday"));
-                    hs_calenderDate.add(new CalendarDay(date));
-
-                    calendarView.addDecorator(new EventDecorator(3669815, hs_calenderDate));
+                    hm_calendarDate.put(new CalendarDay(date), jsonObject.getString("s_remark"));
                 }
-                System.out.println(hs_calenderDate);
+                calendarView.addDecorator(new EventDecorator(Color.MAGENTA, hm_calendarDate.keySet()));
             } catch (JSONException e) {
                 e.printStackTrace();
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-        }else{
-            Toast.makeText(getApplicationContext(), "Calendar file doesn't exist", Toast.LENGTH_SHORT);
+        } else {
+            Toast.makeText(getBaseContext(), "Calendar file doesn't exist", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -135,27 +145,24 @@ public class CalendarActivity extends AppCompatActivity {
         return (netInfo != null && netInfo.isConnected());
     }
 
-    private class HolidayObject{
-        private int companyHolidayId;
-        private String remark;
-        private String date;
+    public class EventDecorator implements DayViewDecorator {
 
-        public HolidayObject(int companyHolidayId, String remark, String date) {
-            this.companyHolidayId = companyHolidayId;
-            this.remark = remark;
-            this.date = date;
+        private final int color;
+        private final HashSet<CalendarDay> dates;
+
+        public EventDecorator(int color, Collection<CalendarDay> dates) {
+            this.color = color;
+            this.dates = new HashSet<>(dates);
         }
 
-        public int getCompanyHolidayId() {
-            return companyHolidayId;
+        @Override
+        public boolean shouldDecorate(CalendarDay day) {
+            return dates.contains(day);
         }
 
-        public String getRemark() {
-            return remark;
-        }
-
-        public String getDate() {
-            return date;
+        @Override
+        public void decorate(DayViewFacade view) {
+            view.addSpan(new DotSpan(15, color));
         }
     }
 }
