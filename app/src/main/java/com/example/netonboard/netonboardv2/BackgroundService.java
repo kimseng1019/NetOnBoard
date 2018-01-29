@@ -20,6 +20,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.AsyncHttpResponseHandler;
 import com.loopj.android.http.RequestParams;
 
+import org.apache.http.conn.scheme.HostNameResolver;
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -48,7 +49,7 @@ public class BackgroundService extends Service {
     static final int REFRESHSUPPORT = 1000 * 60 * 30;
     static final int REFRESHSERVER = 1000;
     static final int REFRESHNOTIFICATION = 1000;
-    static final int NOTIFICATIONDELAYTIME = 1000*60*5;
+    static final int NOTIFICATIONDELAYTIME = 1000 * 60 * 5;
 
     final static int fiveMinuteMillis = 1000 * 60 * 5;
     String tester = "ABCDEFGHIJK";
@@ -149,7 +150,7 @@ public class BackgroundService extends Service {
             String body = client.newCall(request).execute().body().string();
             fileIO.writeToFile(fileIO.FILENAMEDOWN, body);
             try {
-                if(!body.equals("")) {
+                if (!body.equals("")) {
                     JSONArray jArray = new JSONArray(body);
                     if (jArray.length() > curServerDown && isAppIsInBackground(getApplicationContext())) //if newComing serverDown is more than curServerDown
                         notificationBuilder(jArray.length());
@@ -230,7 +231,7 @@ public class BackgroundService extends Service {
     public void notificationPrompt() {
         long lastPromptLong = lastPromptTime.getTime();
         long curTimeLong = System.currentTimeMillis();
-        long timeDiff = (curTimeLong - lastPromptLong)/1000;
+        long timeDiff = (curTimeLong - lastPromptLong) / 1000;
         Log.i(TAG, timeDiff + "s");
         if ((curServerDown > 0 && curTimeLong > lastPromptLong + NOTIFICATIONDELAYTIME) && isAppIsInBackground(getApplicationContext())) {
             notificationBuilder(curServerDown);

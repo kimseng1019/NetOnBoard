@@ -1,9 +1,12 @@
 package com.example.netonboard.netonboardv2;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -22,11 +25,13 @@ public class GlobalFileIO {
     static final String FILENAMESUPPORT = "support";
     static final String FILENAMENOTIFYTIME = "notifyTime";
     public static final String FILENAMEREMARK = "remark";
+    public static final String FILENAMECALENDAR = "companyCalendar";
 //    final File fileDown = new File(context.getFilesDir(), FILENAMEDOWN);
 //    final File fileHistory = new File(context.getFilesDir(), FILENAMEHISTORY);
 //    final File fileSupport = new File(context.getFilesDir(), FILENAMESUPPORT);
 //    final File fileRemark = new File(context.getFilesDir(), FILENAMEREMARK);
 //    final File fileNotifyTime = new File(context.getFilesDir(), FILENAMENOTIFYTIME);
+//    final File fileCalendar = new File(context.getFilesDir(), FILENAMECALENDAR);
 
     public GlobalFileIO(Context context) {
         this.context = context;
@@ -65,5 +70,4 @@ public class GlobalFileIO {
             e.printStackTrace();
         }
     }
-
 }
